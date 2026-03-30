@@ -51,9 +51,3 @@ Credits
 • Inspired by Codesistency YouTube Tutorial on building a password generator.
 • Used Font Awesome icons via CDNJS.
 • GitHub Copilot helped refine the code.
-
-📁 Project Structure
-password-generator/
-├── index.html       # Main HTML page
-├── style.css        # Styling
-└── script.js        # Password generation logic

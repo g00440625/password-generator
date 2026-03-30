@@ -110,3 +110,27 @@ function createRandomPassword(length, includeUppercase, includeLowercase, includ
 
     return password;
 }
+
+// Copy password to clipboard
+copyButton.addEventListener("click", () => {
+    if (!passwordInput.value) return;
+    // Use Clipboard API to copy text
+    navigator.clipboard
+        .writeText(passwordInput.value)
+        .then(() => showCopySuccess())
+        .catch((error) => console.log("Could not copy:", error));
+});
+
+function showCopySuccess() {
+    // Change copy button to checkmark and color to green
+    copyButton.classList.remove("far", "fa-copy");
+    copyButton.classList.add("fas", "fa-check");
+    copyButton.style.color = "#48bb78";
+
+    //Button will revert back to copy icon after 1.5 seconds
+    setTimeout(() => {
+        copyButton.classList.remove("fas", "fa-check");
+        copyButton.classList.add("far", "fa-copy");
+        copyButton.style.color = "";
+    }, 1500);
+} 

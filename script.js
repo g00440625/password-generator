@@ -41,6 +41,56 @@ function makePassword() {
 
     const newPassword = createRandomPassword(length, includeUppercase, includeLowercase, includeNumbers, includeSymbols);
     passwordInput.value = newPassword;
+    updateStrengthIndicator(newPassword);
+}
+
+function updateStrengthIndicator(password) {
+    const length = password.length;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumbers = /[0-9]/.test(password);
+    const hasSymbols = /[!@#$%^&*()\-_=+\[\]{}|;:,.<>?\/]/.test(password);
+
+    let strengthScore = 0;
+
+    // Add points based on password length - Each character gives 2 points, but max contribution from length is 40
+    strengthScore += Math.min(length * 2, 40);
+
+    // Each type (uppercase, lowercase, numbers, symbols) gives 15 points
+    if (hasUppercase) strengthScore += 15;
+    if (hasLowercase) strengthScore += 15;
+    if (hasNumbers) strengthScore += 15;
+    if (hasSymbols) strengthScore += 15;
+
+    // If password is less than 8 characters, cap the total score at 40
+    if (length < 8) {
+        strengthScore = Math.min(strengthScore, 40);
+    }
+
+    // Ensure the strength score is within the valid range
+    const safeScore = Math.max(5, Math.min(100, strengthScore));
+    strengthBar.style.width = safeScore + "%";
+
+    let strengthLabelText = "";
+    let barColor = "";
+
+    // Update strength bar and text 
+    if (strengthScore < 40) {
+      // weak password
+      barColor = "#fc8181"; // Red
+      strengthLabelText = "Weak";
+    } else if (strengthScore < 70) {
+      // Medium password
+      barColor = "#fbd38d"; // Yellow
+      strengthLabelText = "Medium";
+    } else {
+      // Strong password
+      barColor = "#68d391"; // Green
+      strengthLabelText = "Strong";
+    }
+
+    strengthBar.style.backgroundColor = barColor;
+    strengthLabel.textContent = strengthLabelText;
 }
 
 function createRandomPassword(length, includeUppercase, includeLowercase, includeNumbers, includeSymbols) {

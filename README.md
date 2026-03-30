@@ -42,10 +42,8 @@ Option 2 — Run Locally
 
 🤖 AI Acknowledgment
 This project utilized AI tools to improve understanding and code quality:
-1. GitHub Copilot
-Helped understand and refine the core function logic, particularly the random password generation algorithm
-2. Claude
-Suggestions for README documentation.
+1. GitHub Copilot: Helped understand and refine the core function logic, particularly the random password generation algorithm
+2. Claude: Suggestions for README documentation.
 
 Credits
 - Inspired by Codesistency YouTube Tutorial on building a password generator.
